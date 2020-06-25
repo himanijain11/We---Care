@@ -15,14 +15,14 @@ class Main extends React.Component {
             <Router>
                 <div className="App">
                     <div style={{ display: "flex", margin: "5px 10px 20px", justifyContent: "space-between" }}>
-                        <Link style={{ textDecoration: 'none', color: "black" }} to="/">Login</Link>
                         <Link style={{ textDecoration: 'none', color: "black" }} to="/Dashboard">AppBar</Link>
+                        <Link style={{ textDecoration: 'none', color: "black" }} to="/Login">Login</Link>
                         <Link style={{ textDecoration: 'none', color: "black" }} to="/Temp">Temperature Check</Link>
                         <Link style={{ textDecoration: 'none', color: "black" }} to="/Checkout">Checkout</Link>
                     </div>
                     <Switch>
-                        <Route exact path='/' component={Login}></Route>
                         <Route exact path='/Dashboard' component={Appbar}></Route>
+                        <Route exact path='/Login' component={Login}></Route>
                         <Route exact path='/Temp' component={Temp}></Route>
                         <Route exact path='/Checkout' component={Checkout}></Route>
                     </Switch>
