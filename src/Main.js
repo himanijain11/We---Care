@@ -1,35 +1,29 @@
-// import Dashboard from './Dashboard';
-import E from './Temporary/E';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Temp from './Component/TemperatureCheck/Temp'
-import Checkout from './Component/Checkout/Checkout';
-import Appbar from './Component/Appbar/Appbar'
-import Login from './Component/Login/Login';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Gate from './pages/Login/GatekeeperLogin';
+import MainPage from './pages/Mainpage/MainPage';
+import AdminDash from './pages/AdminDash/AdminDash';
+import Admin from './pages/Login/AdminLogin';
+import StudentLog from './pages/Login/StudentLogin';
+import StudentRegister from './pages/StudentRegister/StudentRegister';
+import Excel2 from './pages/Excel/Excel2';
+import Assessment from './pages/Assesment/Assessment';
+import Excel from './pages/Excel/Excel';
 
-
-
-class Main extends React.Component {
-    render() {
-        return (
-            <Router>
-                <div className="App">
-                    <div style={{ display: "flex", margin: "5px 10px 20px", justifyContent: "space-between" }}>
-                        <Link style={{ textDecoration: 'none', color: "black" }} to="/Dashboard">AppBar</Link>
-                        <Link style={{ textDecoration: 'none', color: "black" }} to="/Login">Login</Link>
-                        <Link style={{ textDecoration: 'none', color: "black" }} to="/Temp">Temperature Check</Link>
-                        <Link style={{ textDecoration: 'none', color: "black" }} to="/Checkout">Checkout</Link>
-                    </div>
-                    <Switch>
-                        <Route exact path='/Dashboard' component={Appbar}></Route>
-                        <Route exact path='/Login' component={Login}></Route>
-                        <Route exact path='/Temp' component={Temp}></Route>
-                        <Route exact path='/Checkout' component={Checkout}></Route>
-                    </Switch>
-                </div>
-            </Router>
-
-        )
-    }
-}
-export default Main;
+export default () => (
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/Demo" component={AdminDash} />
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/Login" component={Admin} />
+            <Route exact path="/Login3" component={StudentLog} />
+            <Route exact path="/Login4" component={Gate} />
+            <Route exact path='/Excel' component={Excel}></Route>
+            <Route exact path='/App' component={StudentRegister}></Route>
+            <Route exact path='/Excel2' component={Excel2}></Route>
+            {/* <Route exact path='/Checkout' component={Checkout}></Route> */}
+            {/* <Route exact path='/Pcheckout' component={PCheckout}></Route> */}
+            <Route exact path='/Assessment' component={Assessment}></Route>
+        </Switch>
+    </BrowserRouter>
+)
