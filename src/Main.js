@@ -9,7 +9,9 @@ import StudentRegister from './pages/StudentRegister/StudentRegister';
 import Excel2 from './pages/Excel/Excel2';
 import Assessment from './pages/Assesment/Assessment';
 import Excel from './pages/Excel/Excel';
-
+import StudentAttend from '../src/pages/StudentAttendance/StudentAttend';
+import MessageReport from '../src/pages/MessageReport/MessageReport';
+import StudentDash from './pages/StudentDash/StudentDash';
 export default () => (
     <BrowserRouter>
         <Switch>
@@ -21,9 +23,11 @@ export default () => (
             <Route exact path='/Excel' component={Excel}></Route>
             <Route exact path='/App' component={StudentRegister}></Route>
             <Route exact path='/Excel2' component={Excel2}></Route>
-            {/* <Route exact path='/Checkout' component={Checkout}></Route> */}
-            {/* <Route exact path='/Pcheckout' component={PCheckout}></Route> */}
+            <Route exact path='/StudentDash' component={StudentDash}></Route>
             <Route exact path='/Assessment' component={Assessment}></Route>
+            <Route exact path='/StudentAttend' component={StudentAttend}></Route>
+            <Route exact path='/MessageReport' component={MessageReport}></Route>
+            
         </Switch>
     </BrowserRouter>
 )
