@@ -77,7 +77,11 @@ class App extends Component {
     const { classes } = this.props
     return (
 
-      <div>
+      <div
+      style={{
+        position: 'absolute', left: '45%', top: '40%',
+        transform: 'translate(-18%, -50%)'
+      }}>
         {this.state.pass}
         {this.state.st ? (<div> Welcome</div>) : (
           <Container component="main" maxWidth="xs">
@@ -103,7 +107,7 @@ class App extends Component {
                 <FormControlLabel control={<Checkbox value="remember" color="primary" />}
                   label="Remember me" />
 
-                <Button onClick={this.handleLogin} fullWidth variant="contained" color="primary" className={classes.submit}>Sign In </Button>
+                <Button onClick={this.handleLogin} fullWidth variant="contained" color="transparent" className={classes.submit}><Link to ="/Demo">Sign In </Link></Button>
 
                 <Grid container>
                   <Grid item xs>
@@ -124,6 +128,7 @@ class App extends Component {
 
         )}
       </div>
+      
 
     );
   }

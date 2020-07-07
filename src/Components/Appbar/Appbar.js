@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,10 +14,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-// import E from 'E';
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -111,6 +107,7 @@ export default function PrimarySearchAppBar() {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
+
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
@@ -118,10 +115,23 @@ export default function PrimarySearchAppBar() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+      {/* <Router> */}
+        {/* <Link to="/Message"> */}
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          {/* </Link> */}
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+
+        {/* <Switch> */}
+          {/* <Route exact path='/Message' component={Message}></Route> */}
+        {/* </Switch> */}
+
+
+      {/* </Router> */}
+    </Menu >
+
+
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -138,7 +148,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+            {/* <MailIcon /> */}
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -146,7 +156,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            {/* <NotificationsIcon /> */}
           </Badge>
         </IconButton>
         <p>Notifications</p>
