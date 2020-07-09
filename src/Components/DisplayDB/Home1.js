@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { makeStyles,withStyles, withTheme } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
+import {Table} from 'react-bootstrap';
+import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -13,6 +14,9 @@ import{BrowserRouter as Router,
     // import Home from '/Home'; 
     import HomeIcon from "@material-ui/icons/Home";
     import Axios from 'axios';
+    import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
   
 const useStyles = ((theme) => ({
   root: {
@@ -34,41 +38,67 @@ const useStyles = ((theme) => ({
     //  backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
   },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  page:{
+    textAlign:'center',
+
+  },
 }));
 
 class Home1 extends Component 
 {
   constructor()
-    {
-        super();
-        this.state={
-          kalu:[]
-        };
-    }
-    componentDidMount(){
-        Axios.get('http://localhost:8080/examples/displaycheck.jsp').then(response=>{
-          this.setState({kalu: response.data.responses})  
-        }).catch(err => {
-            console.log("Failed");
-        })
+  {
+      super();
+      this.state={
+        kalu:[]
+      };
+  }
+  componentDidMount(){
+      Axios.get('http://localhost:8080/examples/displaycheck.jsp').then(response=>{
+        this.setState({kalu: response.data.responses})  
+      }).catch(err => {
+          console.log("Failed");
+      })
 
-    }
- render(){
-    const { classes} = this.props
+  }
+ 
 
-  return (
-    <div className={classes.root}>
-      
-                {    this.state.kalu.map((ag,key) => 
-                    <div key={key+(ag.Studentname)}>
-                        {key},  {ag.Studentname},    {ag.StudentID},  
-                    </div>
-                    )
-                }
-        
+    render(){
+      const { classes} = this.props
+  
+    return (
+<div >
+<div className={classes.page}>
+  <br />
+  <br />
+<Table>
+<thead>
+<tr>
+<th>Studentname</th>
+<th>StudentID</th>
+</tr>
+</thead>
+<tbody>
+{    this.state.kalu.map((item) => (
+<tr>
+<td>{item.Studentname}</td>
+<td>{item.StudentID}</td>
+</tr>
 
-    </div>
-  );
+
+))}
+
+</tbody>
+</Table>
+
+</div>
+</div>
+);
 }
 }
 export default withStyles(useStyles)(Home1);

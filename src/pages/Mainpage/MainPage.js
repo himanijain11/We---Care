@@ -61,90 +61,54 @@ class MainPage extends Component {
     this.state = {
       username: '',
       password: '',
-      checked: {
-        stu: false,
-        gat: false,
-        adm: false
-      }
+      
     }
   }
 
-  handleChange = (e) => {
-    switch (e.target.name) {
-      case 'gat':
-        this.setState({
-          checked: {
-            stu: false,
-            gat: true,
-            adm: false
 
-          }
-        })
-        break
-      case 'adm':
-        this.setState({
-          checked: {
-            stu: false,
-            gat: false,
-            adm: true
-
-          }
-        })
-        break
-      case 'stu':
-        this.setState({
-          checked: {
-            stu: true,
-            gat: false,
-            adm: false
-
-          }
-        })
-        break
-      default:
-        break
-    }
-  }
 
   handleDetailChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleLogin = () => {
-    if (this.state.checked.adm) {
-      if (this.state.username === 'Himani' && this.state.password === '123')
-        this.props.history.push('/Demo')
-      else
-        alert('Wrong Details')
+    const data = {
+      'username': this.state.username,
+      'password': this.state.password
     }
-    else if (this.state.checked.stu) {
-      if (this.state.username === 'Himani' && this.state.password === '123')
-        this.props.history.push('/StudentDash')
-      else
-        alert('Wrong Details')
-    }
-    else {
-      if (this.state.username === 'Himani' && this.state.password === '123')
-        this.props.history.push('#')
-      else
-        alert('Wrong Details')
-    }
+    const role = Axios.get('http://localhost:8080/examples/login.jsp', { params: data }).then(response => {
+    console.log(response) 
+    if (response.data.role === 'Nothing') {
+        alert('Wrong Password or Id')
+      } else {
+        if (response.data.role === 'admin')
+          this.props.history.push('/demo')
+        else if (response.data.role === 'Student')
+          this.props.history.push('/StudentDash')
+        else
+          this.props.history.push('/#')
+      }
+
+    }).catch(err => {
+      console.log("Failed");
+
+    })
   }
+
+
 
 
   render() {
     console.log(this.state)
     const { classes } = this.props
     return (
-
-
       <div>
         <div className={classes.heading}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h4" variant="h4">
-            Main Page
+            Login Page
           </Typography>
         </div>
         <React.Fragment>
@@ -180,42 +144,6 @@ class MainPage extends Component {
             </Grid>
           </Grid>
         </React.Fragment>
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checked.adm}
-                onChange={this.handleChange}
-                name="adm"
-                color="primary"
-              />
-            }
-            label="Admin"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checked.stu}
-                onChange={this.handleChange}
-                name="stu"
-                color="primary"
-              />
-            }
-            label="Student"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checked.gat}
-                onChange={this.handleChange}
-                name="gat"
-                color="primary"
-              />
-            }
-            label="Gatekeeper"
-          />
-        </Box>
-
         <div className={classes.paper1}>
           <Button onClick={this.handleLogin} variant="contained" color="transparent" fullWidth={true}> Login </Button>
         </div>
