@@ -20,12 +20,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import Appbar from '../../Components/Appbar/Appbar'
-// import Excel from '../Excel/Excel';
+import Appbar from '../../Components/Appbar/Appbar'
+import Excel from '../Excel/Excel';
 import clsx from 'clsx';
-// import Excel2 from '../Excel/Excel2';
-// import App from '../StudentRegister/StudentRegister';
-// import Assessment from '../Assesment/Assessment';
+import Excel2 from '../Excel/Excel2';
+import App from '../StudentRegister/StudentRegister';
+import Assessment from '../Assesment/Assessment';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -114,7 +114,7 @@ const useStyles = ((theme) => ({
     },
 }));
 
-class StudentDash extends Component {
+class GatekeeperDash extends Component {
     constructor() {
         super();
         this.state = {
@@ -135,6 +135,8 @@ class StudentDash extends Component {
 
             <div className={classes.root}>
 
+
+
                 <CssBaseline />
                 <AppBar position="absolute" color="secondary" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
@@ -145,14 +147,15 @@ class StudentDash extends Component {
                             onClick={this.handleDrawerOpen}
                             className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
                         >
-                            <MenuIcon />
+                        <MenuIcon />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            Student Dashboard
+                            Gatekeeper Dashboard
                         </Typography>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             {"Hello! " + localStorage.getItem('user')}
                         </Typography>
+                       
                         <IconButton color="inherit">
                             {/* <Badge badgeContent={4} color="secondary"> */}
                             <NotificationsIcon />
@@ -165,8 +168,10 @@ class StudentDash extends Component {
                     classes={{
                         paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                     }}
+
                     open={this.state.open}
                 >
+
                     <div className={classes.toolbarIcon}>
 
                         <IconButton onClick={this.handleDrawerClose}>
@@ -174,33 +179,42 @@ class StudentDash extends Component {
                         </IconButton>
                     </div>
                     <Divider />
+                    {/* <Drawer> */}
                     <Router>
                         <div>
                             <List>
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Assessment"> <HomeIcon /></a>
+
+                                        <a href="/TemperatureCheck"> <HomeIcon /></a>
                                     </ListItemIcon>
-                                    {<a href="/Assessment" >Self Assesment</a>}
+
+
+                                    {<a href="/TemperatureCheck" >Temperature Check</a>}
                                 </ListItem>
+
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/StudentAttend"> <HomeIcon /></a>
+                                        <a href="/"> <PersonOutlineOutlinedIcon /></a>
+
+
                                     </ListItemIcon>
-                                    <a href="/StudentAttend" >Attendence Report</a>
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/MessageReport"> <HomeIcon /></a>
-                                    </ListItemIcon>
-                                    <a href="/MessageReport" >Message Report</a>
+                                    {/* <ListItemText primary={"Login"}/> */}
+
+                                    <a href="/" >Message Report
+                        </a>
                                 </ListItem>
                             </List></div></Router>
                     <Divider />
                 </Drawer>
+
+
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
                     <Container maxWidth="lg" className={classes.container}>
+
+
+
                     </Container>
                 </main>
 
@@ -210,4 +224,4 @@ class StudentDash extends Component {
         );
     }
 }
-export default withStyles(useStyles)(StudentDash);
+export default withStyles(useStyles)(GatekeeperDash);
