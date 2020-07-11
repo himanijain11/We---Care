@@ -114,7 +114,7 @@ const useStyles = ((theme) => ({
     },
 }));
 
-class Dashboard1 extends Component {
+class AdminDash extends Component {
     constructor() {
         super();
         this.state = {
@@ -134,9 +134,6 @@ class Dashboard1 extends Component {
         return (
 
             <div className={classes.root}>
-
-
-
                 <CssBaseline />
                 <AppBar position="absolute" color="secondary" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
@@ -147,14 +144,14 @@ class Dashboard1 extends Component {
                             onClick={this.handleDrawerOpen}
                             className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
                         >
-
                             <MenuIcon />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             Admin Dashboard
-
-
-</Typography>
+                        </Typography>
+                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                            {"Hello! " + localStorage.getItem('user')}
+                        </Typography>
                         <IconButton color="inherit">
                             {/* <Badge badgeContent={4} color="secondary"> */}
                             <NotificationsIcon />
@@ -204,10 +201,6 @@ class Dashboard1 extends Component {
                         </a>
                                 </ListItem>
 
-
-
-
-
                                 <ListItem button>
                                     <ListItemIcon>
                                         <a href="/Excel2"> <AddOutlinedIcon /></a>
@@ -230,12 +223,32 @@ class Dashboard1 extends Component {
 
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Checkout"> <HomeIcon /></a>
+                                        <a href="/AssessmentDisplay"> <HomeIcon /></a>
 
                                     </ListItemIcon>
 
-                                    <a href="/Checkout" >Message Report</a>
+                                    <a href="/AssessmentDisplay" >Assesment Report Display</a>
                                 </ListItem>
+
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <a href="/StudentProAdmin"> <HomeIcon /></a>
+
+                                    </ListItemIcon>
+
+                                    <a href="/StudentProAdmin" > Student Profile Display</a>
+                                </ListItem>
+
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <a href="/TempDisplayReport"> <HomeIcon /></a>
+
+                                    </ListItemIcon>
+
+                                    <a href="/TempDisplayReport" > Temperature Report Display</a>
+                                </ListItem>
+
+
 
 
 
@@ -260,4 +273,4 @@ class Dashboard1 extends Component {
         );
     }
 }
-export default withStyles(useStyles)(Dashboard1);
+export default withStyles(useStyles)(AdminDash);

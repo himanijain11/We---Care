@@ -64,9 +64,6 @@ class MainPage extends Component {
       
     }
   }
-
-
-
   handleDetailChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -81,12 +78,15 @@ class MainPage extends Component {
     if (response.data.role === 'Nothing') {
         alert('Wrong Password or Id')
       } else {
+        localStorage.setItem('user',this.state.username)
+        localStorage.setItem('currentUser',true)
         if (response.data.role === 'admin')
           this.props.history.push('/demo')
         else if (response.data.role === 'Student')
           this.props.history.push('/StudentDash')
         else
-          this.props.history.push('/#')
+          this.props.history.push('/GatekeeperDash')
+          
       }
 
     }).catch(err => {
@@ -99,7 +99,7 @@ class MainPage extends Component {
 
 
   render() {
-    console.log(this.state)
+    localStorage.setItem('currentUser',false)
     const { classes } = this.props
     return (
       <div>
