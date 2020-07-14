@@ -1,65 +1,134 @@
 import React, { Component } from 'react';
-
-
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+//import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { withStyles, TableCell, TableRow, TableHead, Table, Paper, TableContainer, TableBody } from '@material-ui/core';
+const useStyles = ((theme) => ({
 
-const useStyles = {
-  table: {
-    minWidth: 650,
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(20)
   },
-};
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('23-july-10', 'Fever' ,'23%',),
-  createData('12-june-10', 'Cold', '09%', ),
-  createData('02-jan-10', 'Healthy', '90%', ),
-  createData('21-feb-10', 'Healthy', '99%', ),
-  createData('23-sep-10', 'Healthy', '80%', ),
-];
-
-
+    table: {
+        minWidth: 650,
+    },
+}));
 
 class StudentAttend extends Component {
-  render() {
-    const {classes} = this.props
-    return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell align="right">Symptoms</TableCell>
-              <TableCell align="right">Attendence stats</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    constructor() {
+        super()
+       
+        this.state = {
+            t1:'',
+            t2:'',
+            
+            tabledata: []
+        }
+    }
+    fun(e){
+        this.setState({
+       [e.target.name]:e.target.value     
+        })
+      }
+      sendData(ev){
+        const t1=this.state.t1
+        const t2=this.state.t2
+        
+        
+        const data={
+          t1,t2
+             }}
 
 
-    );
+
+
+
+
+
+    handleShow = () => {
+        Axios.get('http://localhost:8080/examples/attendance.jsp').then((response) => {
+            this.setState({
+                tabledata: response.data.responses
+            })
+        })
+    }
+
+
+    render() {
+        const { classes } = this.props
+
+
+        return (
+          <div>
+<Grid>
+                     <div className={classes.form}>
+                       <TextField variant="outlined" label="class" id="outlined-size-small"  size="small" name="t1"  onChange={this.fun.bind(this)} />
+                       </div>
+                       <div className={classes.form}>
+                       <TextField variant="outlined" label="section" id="outlined-size-small"  size="small" name="t2"  onChange={this.fun.bind(this)} />  
+                      </div>
+
+
+
+
+
+
+
+
+
+             
+                  <div className={classes.paper}>
+                  <center><Button onClick={this.handleShow} variant="contained">Show Data</Button></center>
+                      <br />
+                      <br />
+                      <center>
+
+                          <TableHead>
+                              <TableRow>
+                                 
+                                  <TableCell align="right">Student ID</TableCell>
+                                  <TableCell>Student Name</TableCell>
+                                  <TableCell align="right">Fathers Name</TableCell>
+                                  <TableCell align="right">Class</TableCell>
+                                  <TableCell align="right">Section</TableCell>
+                                  <TableCell align="right">Contact</TableCell>
+                                  <TableCell align="right">Gender</TableCell>
+                                  <TableCell align="right">Transportation</TableCell>
+                                  <TableCell align="right">Temperature</TableCell>
+                                  
+                              </TableRow>
+                          </TableHead>
+                          <TableBody>
+                              {this.state.tabledata.map((ag) => (
+                                  <TableRow >
+                                      
+                                      <TableCell align="right">{ag.StudentID}</TableCell>
+                                      <TableCell align="right">{ag.StudentName}</TableCell>
+                                      <TableCell align="right">{ag.FathersName}</TableCell>
+                                      <TableCell align="right">{ag.Class}</TableCell>
+                                      <TableCell align="right">{ag.Section}</TableCell>
+                                      <TableCell align="right">{ag.ContactNumber}</TableCell>
+                                      <TableCell align="right">{ag.Gender}</TableCell>
+                                      <TableCell align="right">{ag.Transportation}</TableCell>
+                                      <TableCell align="right">{ag.Temperature}</TableCell>
+                                      
+                                  </TableRow>
+                              ))}
+
+                          </TableBody>
+
+                      </center>
+                  </div>
+              </Grid>
+          </div>
+      );
   }
 }
-
-export default withStyles(useStyles)(StudentAttend)
+export default withStyles(useStyles)(StudentAttend);

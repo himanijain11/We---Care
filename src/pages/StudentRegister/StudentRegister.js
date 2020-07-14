@@ -14,9 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
-
-
-
+import AdminDash from '../AdminDash/AdminDash';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -52,7 +50,6 @@ const useStyles = ((theme) => ({
 }));
 
 class App extends Component {
-  state = { checked: false }
   constructor() {
     super();
     this.state = {
@@ -68,14 +65,13 @@ class App extends Component {
       message: ""
     }
   }
-  fun(e) {
+  fun = e => {
+    console.log(e.target.value)
     this.setState({
       [e.target.name]: e.target.value
     })
-
-    
   }
-  sendData(ev) {
+  sendData = ev => {
     const t1 = this.state.t1
     const t2 = this.state.t2
     const t3 = this.state.t3
@@ -84,13 +80,10 @@ class App extends Component {
     const t6 = this.state.t6
     const t7 = this.state.t7
     const t8 = this.state.t8
-
-
     const data = {
       t1, t2, t3, t4, t5, t6, t7, t8
     }
-   
-    Axios.get('http://localhost:8080/examples/wecare_register.jsp', { params: data }).then(response => {
+    Axios.get('http://localhost:8080/examples/covid19_register.jsp', { params: data }).then(response => {
       console.log(response);
       this.setState({
         message: response.data.response
@@ -101,28 +94,31 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     const { classes } = this.props
     return (
-
-     
-      
-
       <div>
-        <div className={classes.paper}>
+        <AdminDash />
+        <div style={{marginTop:"100px"}}  className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Register
-    </Typography>
-
-
+          </Typography>
           <div className={classes.form} noValidate>
             <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Student ID" name="t1" onChange={this.fun.bind(this)} />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                id="standard-size-normal"
+                label="Student ID" name="t1" onChange={this.fun.bind(this)} />
             </div>
             <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Student name" name="t2" onChange={this.fun.bind(this)} />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                id="standard-size-normal" label="Student name" name="t2" onChange={this.fun.bind(this)} />
             </div>
             <div>
               <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Fathers name" name="t3" onChange={this.fun.bind(this)} />
@@ -137,26 +133,19 @@ class App extends Component {
               <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Contact no" name="t6" onChange={this.fun.bind(this)} />
             </div>
             <div>
-             <Checkbox variant="outlined" margin="normal" id= "standard-size-normal" label="Gender" name="t7" onChange={this.fun.bind(this)}/> <span>Male</span>
-             <Checkbox variant="outlined" margin="normal" id= "standard-size-normal" label="Gender" name="t7" onChange={this.fun.bind(this)}/> <span>Female</span>
-              
- 
-   
-              
+              <select name="t7" value={this.state.t7} onChange={this.fun}>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
             </div>
             <div>
               <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Transportation" name="t8" onChange={this.fun.bind(this)} />
             </div>
-
             <Button onClick={this.sendData.bind(this)} size="small" variant="contained" color="primary" className={classes.submit}>Submit </Button>
-
             {this.state.message}
-
           </div>
         </div>
-        </div>   
-
-
+      </div>
 
     );
   }

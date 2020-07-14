@@ -19,7 +19,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 // import Appbar from '../../Components/Appbar/Appbar'
 // import Excel from '../Excel/Excel';
 import clsx from 'clsx';
@@ -33,6 +33,8 @@ import { withStyles, } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import ReportIcon from '@material-ui/icons/Report';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 const drawerWidth = 240;
 
 const useStyles = ((theme) => ({
@@ -74,7 +76,7 @@ const useStyles = ((theme) => ({
         flexGrow: 1,
     },
     drawerPaper: {
-        position: 'relative',
+        // position: 'relative',
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -153,6 +155,9 @@ class StudentDash extends Component {
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             {"Hello! " + localStorage.getItem('user')}
                         </Typography>
+                        <div>
+                        <button onClick={()=>this.props.history.push('/')}  style= {{color:"black" , border:"0px" , borderRadius:"10px" , padding:"10px" , backgroundColor:"white"}}>Logout</button>
+                        </div>
                         <IconButton color="inherit">
                             {/* <Badge badgeContent={4} color="secondary"> */}
                             <NotificationsIcon />
@@ -179,30 +184,21 @@ class StudentDash extends Component {
                             <List>
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Assessment"> <HomeIcon /></a>
+                                        <a href="/Assessment1"> <AssessmentIcon /></a>
                                     </ListItemIcon>
-                                    {<a href="/Assessment" >Self Assesment</a>}
+                                    {<a href="/Assessment1" >Self Assesment</a>}
                                 </ListItem>
+                               
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/StudentAttend"> <HomeIcon /></a>
-                                    </ListItemIcon>
-                                    <a href="/StudentAttend" >Attendence Report</a>
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/MessageReport"> <HomeIcon /></a>
+                                        <a href="/MessageReport"> <EventNoteIcon /></a>
                                     </ListItemIcon>
                                     <a href="/MessageReport" >Message Report</a>
                                 </ListItem>
                             </List></div></Router>
                     <Divider />
                 </Drawer>
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
-                    <Container maxWidth="lg" className={classes.container}>
-                    </Container>
-                </main>
+               
 
             </div>
 
@@ -210,4 +206,4 @@ class StudentDash extends Component {
         );
     }
 }
-export default withStyles(useStyles)(StudentDash);
+export default withRouter( withStyles(useStyles)(StudentDash));

@@ -19,7 +19,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 import Appbar from '../../Components/Appbar/Appbar'
 import Excel from '../Excel/Excel';
 import clsx from 'clsx';
@@ -33,6 +33,13 @@ import { withStyles, } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import ReportIcon from '@material-ui/icons/Report';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+//import ReportIcon from '@material-ui/icons/Report';
+//import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
+import PortraitIcon from '@material-ui/icons/Portrait';
+import RateReviewIcon from '@material-ui/icons/RateReview';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 const drawerWidth = 240;
 
 const useStyles = ((theme) => ({
@@ -74,7 +81,7 @@ const useStyles = ((theme) => ({
         flexGrow: 1,
     },
     drawerPaper: {
-        position: 'relative',
+      
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -132,7 +139,6 @@ class AdminDash extends Component {
         // [open, setOpen] = state,setState(true);
         const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
         return (
-            
 
             <div className={classes.root}>
                 <CssBaseline />
@@ -152,11 +158,13 @@ class AdminDash extends Component {
                         </Typography>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             {"Hello! " + localStorage.getItem('user')}
+                            
                         </Typography>
+                        <div>
+                        <button onClick={()=>this.props.history.push('/')} style= {{color:"black" , border:"0px" , borderRadius:"10px" , padding:"10px" , backgroundColor:"white"}}>Logout</button>
+                        </div>
                         <IconButton color="inherit">
-                            {/* <Badge badgeContent={4} color="secondary"> */}
                             <NotificationsIcon />
-                            {/* </Badge> */}
                         </IconButton>
                     </Toolbar>
                 </AppBar>
@@ -165,113 +173,52 @@ class AdminDash extends Component {
                     classes={{
                         paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                     }}
-
                     open={this.state.open}
                 >
-
                     <div className={classes.toolbarIcon}>
-
                         <IconButton onClick={this.handleDrawerClose}>
                             <ChevronLeftIcon />
                         </IconButton>
                     </div>
                     <Divider />
-                    {/* <Drawer> */}
                     <Router>
                         <div>
                             <List>
                                 <ListItem button>
                                     <ListItemIcon>
-
-                                        <a href="/App"> <HomeIcon /></a>
+                                        <a href="/App">  <GroupAddIcon />  </a>
                                     </ListItemIcon>
-
-
                                     {<a href="/App" >Student Registation</a>}
                                 </ListItem>
-
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Excel"> <PersonOutlineOutlinedIcon /></a>
-
-
+                                        <a href="/Assessment"> <AssessmentIcon /></a>
                                     </ListItemIcon>
-                                    {/* <ListItemText primary={"Login"}/> */}
-
-                                    <a href="/Excel" >Attendence Sheet
-                        </a>
+                                    <a href="/Assessment" >Self Assessment </a>
                                 </ListItem>
-
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Excel2"> <AddOutlinedIcon /></a>
-
+                                        <a href="/AssessmentDisplay"> <EventNoteIcon /></a>
                                     </ListItemIcon>
-                                    {/* <ListItemText primary={"Sign Up"}/> */}
-                                    <a href="/Excel2">Excel Sheet </a>
-
+                                    <a href="/AssessmentDisplay" >Self Assesment Report </a>
                                 </ListItem>
-
-
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/Assessment"> <HomeIcon /></a>
-
+                                        <a href="/StudentProAdmin"> <PortraitIcon /></a>
                                     </ListItemIcon>
-
-                                    <a href="/Assessment" >Assessment Report</a>
-                                </ListItem>
-
-                                <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/AssessmentDisplay"> <HomeIcon /></a>
-
-                                    </ListItemIcon>
-
-                                    <a href="/AssessmentDisplay" >Assesment Report Display</a>
-                                </ListItem>
-
-                                <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/StudentProAdmin"> <HomeIcon /></a>
-
-                                    </ListItemIcon>
-
                                     <a href="/StudentProAdmin" > Student Profile Display</a>
                                 </ListItem>
-
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/TempDisplayReport"> <HomeIcon /></a>
-
+                                        <a href="/TempDisplayReport"> <RateReviewIcon /></a>
                                     </ListItemIcon>
-
-                                    <a href="/TempDisplayReport" > Temperature Report Display</a>
+                                    <a href="/TempDisplayReport" > Temperaturecheck Report </a>
                                 </ListItem>
-
-
-
-
-
-
                             </List></div></Router>
                     <Divider />
                 </Drawer>
-
-
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
-                    <Container maxWidth="lg" className={classes.container}>
-
-
-
-                    </Container>
-                </main>
-
             </div>
-
-
         );
     }
 }
-export default withStyles(useStyles)(AdminDash);
+export default withRouter(withStyles(useStyles)(AdminDash))

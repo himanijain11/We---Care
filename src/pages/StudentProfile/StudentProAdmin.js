@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-
+import AdminDash from '../AdminDash/AdminDash';
 const useStyles = ((theme) => ({
 
 
@@ -23,13 +23,16 @@ class StudentProAdmin extends Component {
             tabledata: []
         }
     }
-    handleShow = () => {
-        Axios.get('http://localhost:8080/examples/Studentprofile.jsp').then((response) => {
-            this.setState({
-                tabledata: response.data.responses
-            })
+    componentDidMount(){
+        Axios.get('http://localhost:8080/examples/covid19_profiledisplay.jsp').then(response=>{
+          this.setState({tabledata: response.data.responses})  
+        }).catch(err => {
+            console.log("Failed");
         })
+  
     }
+
+   
 
 
     render() {
@@ -38,23 +41,24 @@ class StudentProAdmin extends Component {
 
         return (
           <div>
-              <Grid>
+              <AdminDash/>
+              <Grid style={{marginTop:"60px"}}>
                   <div className={classes.paper}>
-                      <center><Button onClick={this.handleShow} variant="contained">Show Data</Button></center>
                       <br />
                       <br />
                       <center>
 
                           <TableHead>
                               <TableRow>
-                                  <TableCell>Student Name</TableCell>
-                                  <TableCell align="right">Student ID</TableCell>
-                                  <TableCell align="right">Father Name</TableCell>
-                                  <TableCell align="right">Class</TableCell>
-                                  <TableCell align="right">Section</TableCell>
-                                  <TableCell align="right">Contact</TableCell>
-                                  <TableCell align="right">Gender</TableCell>
-                                  <TableCell align="right">Transportation</TableCell>
+                               
+                                  <TableCell align="center">Student ID</TableCell>
+                                  <TableCell align="center">Student Name</TableCell>
+                                  <TableCell align="center">Father Name</TableCell>
+                                  <TableCell align="center">Class</TableCell>
+                                  <TableCell align="center">Section</TableCell>
+                                  <TableCell align="center">Contactno</TableCell>
+                                  <TableCell align="center">Gender</TableCell>
+                                  <TableCell align="center">Transportation</TableCell>
                                   
                               </TableRow>
                           </TableHead>
@@ -62,14 +66,14 @@ class StudentProAdmin extends Component {
                               {this.state.tabledata.map((ag) => (
                                   <TableRow >
                                       
-                                      <TableCell align="right">{ag.StudentID}</TableCell>
-                                      <TableCell align="right">{ag.StudentName}</TableCell>
-                                      <TableCell align="right">{ag.FatherName}</TableCell>
-                                      <TableCell align="right">{ag.Class}</TableCell>
-                                      <TableCell align="right">{ag.Section}</TableCell>
-                                      <TableCell align="right">{ag.ContactNumber}</TableCell>
-                                      <TableCell align="right">{ag.Gender}</TableCell>
-                                      <TableCell align="right">{ag.Transportation}</TableCell>
+                                      <TableCell align="center">{ag.StudentID}</TableCell>
+                                      <TableCell align="center">{ag.StudentName}</TableCell>
+                                      <TableCell align="center">{ag.FathersName}</TableCell>
+                                      <TableCell align="center">{ag.Class}</TableCell>
+                                      <TableCell align="center">{ag.Section}</TableCell>
+                                      <TableCell align="center">{ag.Contactno}</TableCell>
+                                      <TableCell align="center">{ag.Gender}</TableCell>
+                                      <TableCell align="center">{ag.Transportation}</TableCell>
                                       
                                   </TableRow>
                               ))}

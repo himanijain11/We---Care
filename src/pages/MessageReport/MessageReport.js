@@ -8,11 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/styles';
+import Gatekeeper from '../GatekeeperDash/GatekeeperDash';
 
 const useStyles = (
   {
     table: {
-      minWidth: 650,
+      minWidth: 500,
     }
   }
 );
@@ -35,7 +36,8 @@ class MessageReport extends Component {
 
     return (
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Gatekeeper/>
+        <Table style={{marginLeft:"250px" , marginTop:"100px"}} className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
@@ -45,9 +47,6 @@ class MessageReport extends Component {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.name}>
-                {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
                 <TableCell >{row.Date}</TableCell>
                 <TableCell >{row.Message}</TableCell>
               </TableRow>

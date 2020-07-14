@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Select, MenuItem, InputLabel } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import Axios from 'axios';
-// import List from '../practise'
+import AdminDash from '../AdminDash/AdminDash';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,12 +75,14 @@ class Assesment extends Component {
         const b = this.state.optionSelected.b
         const c = this.state.optionSelected.c
         const d = this.state.optionSelected.d
+        const username = localStorage.getItem('user')
 
         const data = {
             t1: a,
             t2: b,
             t3: c,
-            t4: d
+            t4: d,
+            username: username
         }
 
         Axios.get('http://localhost:8080/examples/fresh.jsp', { params: data }).then(response => {
@@ -91,9 +93,9 @@ class Assesment extends Component {
         }).catch(err => {
             console.log("Failed");
 
+
         })
     }
-
 
 
 
@@ -173,65 +175,67 @@ class Assesment extends Component {
             this.setState({ activeStep: 0 })
         };
 
-        console.log(this.state)
-
-
-
+        console.log(this.props)
         return (
+            <React.Fragment>
+                <AdminDash />
+                <div style={{
+                    display: "inline-flex",
+                    marginLeft: "500px",
 
 
-
-
-            <div className={classes.root}>
-                <h1>Self Assesment Test</h1>
-                <Stepper activeStep={this.state.activeStep} orientation="vertical">
-                    {data.map((data, index) => (
-                        <Step key={index}>
-                            <StepLabel style={{ fontSize: "3rem", fontVariantCaps: "true" }}>{data.question}</StepLabel>
-                            <StepContent>
-                                <div className={classes.actionsContainer}>
-                                    <div>
+                    flexDirection: "column"
+                }} className={classes.root}>
+                    <div><h1>Self Assesment Test</h1><br /></div>
+                    <Stepper activeStep={this.state.activeStep} orientation="vertical">
+                        {data.map((data, index) => (
+                            <Step key={index}>
+                                <StepLabel style={{ fontSize: "3rem", fontVariantCaps: "true" }}>{data.question}</StepLabel>
+                                <StepContent>
+                                    <div className={classes.actionsContainer}>
                                         <div>
-                                            <Select
-                                                placeholder="Choose Here"
-                                                labelId="demo-simple-select-label"
-                                                style={{ width: "50%" }}
-                                                onChange={handleNext}
+                                            <div>
+                                                <Select
+                                                    placeholder="Choose Here"
+                                                    labelId="demo-simple-select-label"
+                                                    style={{ width: "50%" }}
+                                                    onChange={handleNext}
+                                                >
+                                                    {data.option.map(option => (
+                                                        <MenuItem value={option + "@" + index}>{option}</MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </div>
+                                            <Button
+                                                disabled={this.state.activeStep === 0}
+                                                onClick={handleBack}
+                                                className={classes.button}
                                             >
-                                                {data.option.map(option => (
-                                                    <MenuItem value={option + "@" + index}>{option}</MenuItem>
-                                                ))}
-                                            </Select>
+                                                Back
+                                            </Button>
                                         </div>
-                                        <Button
-                                            disabled={this.state.activeStep === 0}
-                                            onClick={handleBack}
-                                            className={classes.button}
-                                        >
-                                            Back
-                  </Button>
                                     </div>
-                                </div>
-                            </StepContent>
-                        </Step>
-                    ))}
-                    <Button
-                        variant="outlined"
-                        disabled={this.state.filled}
-                        onClick={this.sendData}
-                    >
-                        Finish
-            </Button>
-                </Stepper>
-                {this.state.activeStep === steps.length && (
-                    <Paper square elevation={0} className={classes.resetContainer}>
-                        <Typography>All steps completed - you&apos;re finished</Typography>
-                        <Button onClick={handleReset} className={classes.button}>
-                            Reset
+                                </StepContent>
+                            </Step>
+                        ))}
+                        <button
+                            style={{ display: "inline" }}
+                            disabled={this.state.filled}
+                            onClick={this.sendData}
+                        >
+                            Finish
+                        </button>
+                    </Stepper>
+                    {this.state.activeStep === steps.length && (
+                        <Paper square elevation={0} className={classes.resetContainer}>
+                            <Typography>All steps completed - you&apos;re finished</Typography>
+                            <Button onClick={handleReset} className={classes.button}>
+                                Reset
           </Button>
-                    </Paper>
-                )}
-            </div>
+                        </Paper>
+                    )}
+                </div>
+            </React.Fragment>
 
         );
     }

@@ -19,7 +19,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 import Appbar from '../../Components/Appbar/Appbar'
 import Excel from '../Excel/Excel';
 import clsx from 'clsx';
@@ -33,6 +33,10 @@ import { withStyles, } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import ReportIcon from '@material-ui/icons/Report';
+//import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import OfflinePinIcon from '@material-ui/icons/OfflinePin';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 const drawerWidth = 240;
 
 const useStyles = ((theme) => ({
@@ -74,7 +78,7 @@ const useStyles = ((theme) => ({
         flexGrow: 1,
     },
     drawerPaper: {
-        position: 'relative',
+       
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -155,6 +159,9 @@ class GatekeeperDash extends Component {
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             {"Hello! " + localStorage.getItem('user')}
                         </Typography>
+                        <div>
+                        <button onClick={()=>this.props.history.push('/')}  style= {{color:"black" , border:"0px" , borderRadius:"10px" , padding:"10px" , backgroundColor:"white"}}>Logout</button>
+                        </div>
                        
                         <IconButton color="inherit">
                             {/* <Badge badgeContent={4} color="secondary"> */}
@@ -185,43 +192,27 @@ class GatekeeperDash extends Component {
                             <List>
                                 <ListItem button>
                                     <ListItemIcon>
-
-                                        <a href="/TemperatureCheck"> <HomeIcon /></a>
+                                        <a href="/TemperatureCheck"> <AssignmentTurnedInIcon/></a>
                                     </ListItemIcon>
-
-
                                     {<a href="/TemperatureCheck" >Temperature Check</a>}
                                 </ListItem>
-
                                 <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/"> <PersonOutlineOutlinedIcon /></a>
-
-
-                                    </ListItemIcon>
-                                    {/* <ListItemText primary={"Login"}/> */}
-
-                                    <a href="/" >Message Report
+                                <ListItemIcon>
+                                        <a href="/MessageReport"> <PersonOutlineOutlinedIcon /></a>
+                                    </ListItemIcon>   
+                                 <a href="/MessageReport" >Message Report
                         </a>
                                 </ListItem>
+
+                                   
                             </List></div></Router>
                     <Divider />
                 </Drawer>
 
-
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
-                    <Container maxWidth="lg" className={classes.container}>
-
-
-
-                    </Container>
-                </main>
 
             </div>
 
 
         );
     }
-}
-export default withStyles(useStyles)(GatekeeperDash);
+}export default withRouter(withStyles(useStyles)(GatekeeperDash))

@@ -15,7 +15,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -118,18 +117,18 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
 
     >
-       {/* <Router>  */}
-         {/* <Link to="/Message">  */}
-           <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-           {/* </Link>  */}
-         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* <Router> */}
+        {/* <Link to="/Message"> */}
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          {/* </Link> */}
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
 
-         {/* <Switch>  */}
-           {/* <Route exact path='/Message' component={Message}></Route>  */}
-         {/* </Switch>  */}
+        {/* <Switch> */}
+          {/* <Route exact path='/Message' component={Message}></Route> */}
+        {/* </Switch> */}
 
 
-       {/* </Router>  */}
+      {/* </Router> */}
     </Menu >
 
 

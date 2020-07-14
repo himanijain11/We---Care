@@ -39,12 +39,10 @@ const useStyles = ((theme) => ({
 
   },
   avatar: {
-    margin: theme.spacing(1),
-    marginBottom: theme.spacing(2),
+    margin: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     backgroundColor: theme.palette.secondary.main,
   },
-
-
 
   paper1: {
     marginTop: theme.spacing(8),
@@ -54,6 +52,16 @@ const useStyles = ((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  form: {
+  marginTop: theme.spacing(5),
+  marginBottom: theme.spacing(0),
+    marginLeft: theme.spacing(70),
+    marginRight: theme.spacing(70),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
 
 }));
 
@@ -63,7 +71,7 @@ class MainPage extends Component {
     this.state = {
       username: '',
       password: '',
-
+      
     }
   }
   handleDetailChange = (e) => {
@@ -76,69 +84,67 @@ class MainPage extends Component {
       'password': this.state.password
     }
     const role = Axios.get('http://localhost:8080/examples/login.jsp', { params: data }).then(response => {
-      console.log(response)
-      if (response.data.role === 'Nothing') {
+    console.log(response) 
+    if (response.data.role === 'Nothing') {
         alert('Wrong Password or Id')
       } else {
-        localStorage.setItem('user', this.state.username)
-        localStorage.setItem('currentUser', true)
+        localStorage.setItem('user',this.state.username)
+        localStorage.setItem('currentUser',true)
         if (response.data.role === 'admin')
           this.props.history.push('/demo')
         else if (response.data.role === 'Student')
           this.props.history.push('/StudentDash')
         else
           this.props.history.push('/GatekeeperDash')
+          
       }
+
     }).catch(err => {
       console.log("Failed");
+
     })
   }
   render() {
-    localStorage.setItem('currentUser', false)
+    localStorage.setItem('currentUser',false)
     const { classes } = this.props
     return (
-      
-      <div style={{border: "2px solid black" , paddingBottom: "45px" , margin: "20px" , borderRadius:"20px"}}>
+      <div>
         <div className={classes.heading}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
           <Typography component="h4" variant="h4">
-            Login Page
-          </Typography>
-        </div>
-        <React.Fragment>
-          
-            <Grid style={{ justifyContent: 'center' }} container spacing={3}>
-              <Grid item xs={12} sm={3}>
-                <TextField
-                  required
-                  id="address1"
-                  name="username"
-                  label="Username"
-                  fullWidth
-                  autoComplete="Student Id"
-                  onChange={this.handleDetailChange}
-                />
-              </Grid>
-            </Grid>
-            <Grid style={{ justifyContent: 'center' }} container spacing={3}>
-              <Grid item xs={12} sm={3}>
-                <TextField
-                  required
-                  id="Password"
-                  name="password"
-                  label="password"
-                  fullWidth
-                  autoComplete="given-name"
-                  onChange={this.handleDetailChange}
-                />
-              </Grid>
-            </Grid>
-        </React.Fragment>
+            Login
+          </Typography>  
+          <div className={classes.form}>
+              <TextField
+                required
+                id="address1"
+                name="username"
+                label="Username"
+                size="medium"
+                onChange={this.handleDetailChange}
+              />
+           
+           </div>
+
+           <div className={classes.form}>
+              <TextField
+                required
+                id="Password"
+                name="password"
+                label="password"
+                size="medium"
+                onChange={this.handleDetailChange}
+              />
+           
+         
+           </div>
+        
+      
+      
         <div className={classes.paper1}>
           <Button onClick={this.handleLogin} variant="contained" color="transparent" fullWidth={true}> Login </Button>
         </div>
+      </div>
       </div>
     )
   };
