@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
 
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -50,6 +52,7 @@ const useStyles = ((theme) => ({
 }));
 
 class App extends Component {
+  state = { checked: false }
   constructor() {
     super();
     this.state = {
@@ -69,6 +72,8 @@ class App extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+
+    
   }
   sendData(ev) {
     const t1 = this.state.t1
@@ -84,6 +89,7 @@ class App extends Component {
     const data = {
       t1, t2, t3, t4, t5, t6, t7, t8
     }
+   
     Axios.get('http://localhost:8080/examples/wecare_register.jsp', { params: data }).then(response => {
       console.log(response);
       this.setState({
@@ -98,8 +104,10 @@ class App extends Component {
     const { classes } = this.props
     return (
 
-      <div>
+     
+      
 
+      <div>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -129,7 +137,12 @@ class App extends Component {
               <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Contact no" name="t6" onChange={this.fun.bind(this)} />
             </div>
             <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Gender" name="t7" onChange={this.fun.bind(this)} />
+             <Checkbox variant="outlined" margin="normal" id= "standard-size-normal" label="Gender" name="t7" onChange={this.fun.bind(this)}/> <span>Male</span>
+             <Checkbox variant="outlined" margin="normal" id= "standard-size-normal" label="Gender" name="t7" onChange={this.fun.bind(this)}/> <span>Female</span>
+              
+ 
+   
+              
             </div>
             <div>
               <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Transportation" name="t8" onChange={this.fun.bind(this)} />
@@ -141,10 +154,9 @@ class App extends Component {
 
           </div>
         </div>
+        </div>   
 
 
-
-      </div>
 
     );
   }

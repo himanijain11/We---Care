@@ -16,7 +16,7 @@ const useStyles = ((theme) => ({
     },
 }));
 
-class StudentProAdmin extends Component {
+class StudentProfileDB extends Component {
     constructor() {
         super()
         this.state = {
@@ -83,4 +83,4 @@ class StudentProAdmin extends Component {
       );
   }
 }
-export default withStyles(useStyles)(StudentProAdmin);
+export default withStyles(useStyles)(StudentProfileDB);

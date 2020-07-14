@@ -4,6 +4,7 @@ import MainPage from './pages/Mainpage/MainPage';
 import AdminDash from './pages/AdminDash/AdminDash';
 import StudentRegister from './pages/StudentRegister/StudentRegister';
 import Excel2 from './pages/Excel/Excel2';
+import Appbar from '../src/Components/Appbar/Appbar';
 import Assessment from './pages/Assesment/Assessment';
 import Excel from './pages/Excel/Excel';
 import StudentAttend from '../src/pages/StudentAttendance/StudentAttend';
@@ -14,8 +15,12 @@ import TemperatureCheck from './pages/TemperatureCheck/TemperatureCheck';
 import AssessmentDisplay from './pages/Assesment/AssessmentDisplay';
 import TempDisplayReport from './pages/TemperatureCheck/TempDisplayReport';
 import StudentProAdmin from './pages/StudentProfile/StudentProAdmin';
+
+
+
 export default () => (
     <BrowserRouter>
+       
         <Switch>
             <Route exact path="/Demo" component={AdminDash} />
             <Route exact path="/" component={MainPage} />
@@ -31,6 +36,9 @@ export default () => (
             <Route exact path='/GatekeeperDash' component={GatekeeperDash}></Route>
             <Route exact path='/TemperatureCheck' component={TemperatureCheck}></Route>
             <Route exact path='/MessageReport' component={MessageReport}></Route>
+          
+
+         
         </Switch>
     </BrowserRouter>
 )

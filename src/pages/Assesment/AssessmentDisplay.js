@@ -9,8 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
 const useStyles = ((theme) => ({
-
-
     table: {
         minWidth: 650,
     },
@@ -25,12 +23,12 @@ class AssessmentDisplay extends Component {
     }
     handleShow = () => {
         Axios.get('http://localhost:8080/examples/assessmentdisplay.jsp').then((response) => {
+            console.log(response)
             this.setState({
                 tabledata: response.data.responses
             })
         })
     }
-
 
     render() {
         const { classes } = this.props
@@ -48,10 +46,10 @@ class AssessmentDisplay extends Component {
                             <TableHead>
                                 <TableRow>
                                     
-                                    <TableCell align="right">Fever Type</TableCell>
-                                    <TableCell align="right">Fever Type 2</TableCell>
-                                    <TableCell align="right">"Have you travelled anywhere internationally in the last 28-45 days</TableCell>
-                                    <TableCell align="right">Which of these following</TableCell>
+                                    <TableCell align="center">Fever Type</TableCell>
+                                    <TableCell align="center">Fever Type 2</TableCell>
+                                    <TableCell align="center">"Have you travelled anywhere internationally in the last 28-45 days</TableCell>
+                                    <TableCell align="center">Which of these following</TableCell>
                                     
                                 </TableRow>
                             </TableHead>
@@ -59,10 +57,10 @@ class AssessmentDisplay extends Component {
                                 {this.state.tabledata.map((ag) => (
                                     <TableRow >
                                         
-                                        <TableCell align="right">{ag.name1}</TableCell>
-                                        <TableCell align="right">{ag.name2}</TableCell>
-                                        <TableCell align="right">{ag.name3}</TableCell>
-                                        <TableCell align="right">{ag.name4}</TableCell>
+                                        <TableCell align="center">{ag.name1}</TableCell>
+                                        <TableCell align="center">{ag.name2}</TableCell>
+                                        <TableCell align="center">{ag.name3}</TableCell>
+                                        <TableCell align="center">{ag.name4}</TableCell>
                                        
                                     </TableRow>
                                 ))}
