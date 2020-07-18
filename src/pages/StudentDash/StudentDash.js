@@ -191,9 +191,9 @@ class StudentDash extends Component {
                                
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/MessageReport"> <EventNoteIcon /></a>
+                                        <a href="/MessageRepoStudent"> <EventNoteIcon /></a>
                                     </ListItemIcon>
-                                    <a href="/MessageReport" >Message Report</a>
+                                    <a href="/MessageRepoStudent" >Message Report</a>
                                 </ListItem>
                             </List></div></Router>
                     <Divider />

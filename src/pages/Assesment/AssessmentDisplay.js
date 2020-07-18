@@ -43,7 +43,8 @@ class AssessmentDisplay extends Component {
         return (
             <div>
                 <AdminDash />
-                <Grid style={{marginTop:"60px"}}>
+                
+                <Grid style={{marginTop:"60px" , marginLeft:"220px"}}>
                     <div className={classes.paper}>
                         <br />
                         <br />

@@ -15,6 +15,7 @@ import AssessmentDisplay from './pages/Assesment/AssessmentDisplay';
 import TempDisplayReport from './pages/TemperatureCheck/TempDisplayReport';
 import StudentProAdmin from './pages/StudentProfile/StudentProAdmin';
 import Assessment1 from './pages/Assesment/Assessment1';
+import MessageRepoStudent from './pages/MessageReport/MessageRepoStudent';
 export default () => (
     <BrowserRouter>
         <Switch>
@@ -28,6 +29,7 @@ export default () => (
             <Route exact path='/TempDisplayReport' component={TempDisplayReport}></Route>
             <Route exact path='/StudentDash' component={StudentDash}></Route>
             <Route  path='/Assessment1' component={Assessment1}></Route>
+            <Route exact path='/MessageRepoStudent' component={MessageRepoStudent}></Route>
             <Route exact path='/StudentProAdmin' component={StudentProAdmin}></Route>
             <Route exact path='/StudentAttend' component={StudentAttend}></Route>
             <Route exact path='/GatekeeperDash' component={GatekeeperDash}></Route>
