@@ -53,8 +53,8 @@ const useStyles = ((theme) => ({
     alignItems: 'center',
   },
   form: {
-  marginTop: theme.spacing(5),
-  marginBottom: theme.spacing(0),
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(0),
     marginLeft: theme.spacing(70),
     marginRight: theme.spacing(70),
     display: 'flex',
@@ -71,7 +71,7 @@ class MainPage extends Component {
     this.state = {
       username: '',
       password: '',
-      
+
     }
   }
   handleDetailChange = (e) => {
@@ -84,19 +84,19 @@ class MainPage extends Component {
       'password': this.state.password
     }
     const role = Axios.get('http://localhost:8080/examples/login.jsp', { params: data }).then(response => {
-    console.log(response) 
-    if (response.data.role === 'Nothing') {
+      console.log(response)
+      if (response.data.role === 'Nothing') {
         alert('Wrong Password or Id')
       } else {
-        localStorage.setItem('user',this.state.username)
-        localStorage.setItem('currentUser',true)
+        localStorage.setItem('user', this.state.username)
+        localStorage.setItem('currentUser', true)
         if (response.data.role === 'admin')
           this.props.history.push('/demo')
         else if (response.data.role === 'Student')
           this.props.history.push('/StudentDash')
         else
           this.props.history.push('/GatekeeperDash')
-          
+
       }
 
     }).catch(err => {
@@ -105,7 +105,7 @@ class MainPage extends Component {
     })
   }
   render() {
-    localStorage.setItem('currentUser',false)
+    localStorage.setItem('currentUser', false)
     const { classes } = this.props
     return (
       <div>
@@ -113,38 +113,38 @@ class MainPage extends Component {
           <Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
           <Typography component="h4" variant="h4">
             Login
-          </Typography>  
+          </Typography>
           <div className={classes.form}>
-              <TextField
-                required
-                id="address1"
-                name="username"
-                label="Username"
-                size="medium"
-                onChange={this.handleDetailChange}
-              />
-           
-           </div>
+            <TextField
+              required
+              id="address1"
+              name="username"
+              label="Unique ID"
+              size="medium"
+              onChange={this.handleDetailChange}
+            />
 
-           <div className={classes.form}>
-              <TextField
-                required
-                id="Password"
-                name="password"
-                label="password"
-                size="medium"
-                onChange={this.handleDetailChange}
-              />
-           
-         
-           </div>
-        
-      
-      
-        <div className={classes.paper1}>
-          <Button onClick={this.handleLogin} variant="contained" color="transparent" fullWidth={true}> Login </Button>
+          </div>
+
+          <div className={classes.form}>
+            <TextField
+              required
+              id="Password"
+              name="password"
+              label="password"
+              size="medium"
+              onChange={this.handleDetailChange}
+            />
+
+
+          </div>
+
+
+
+          <div className={classes.paper1}>
+            <Button onClick={this.handleLogin} variant="contained" color="transparent" fullWidth={true}> Login </Button>
+          </div>
         </div>
-      </div>
       </div>
     )
   };

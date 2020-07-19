@@ -79,7 +79,7 @@ const useStyles = ((theme) => ({
         flexGrow: 1,
     },
     drawerPaper: {
-      
+
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -156,10 +156,10 @@ class AdminDash extends Component {
                         </Typography>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             {"Hello! " + localStorage.getItem('user')}
-                            
+
                         </Typography>
                         <div>
-                        <button onClick={()=>this.props.history.push('/')} style= {{color:"black" , border:"0px" , borderRadius:"10px" , padding:"10px" , backgroundColor:"white"}}>Logout</button>
+                            <button onClick={() => this.props.history.push('/')} style={{ color: "black", border: "0px", borderRadius: "10px", padding: "10px", backgroundColor: "white" }}>Logout</button>
                         </div>
                         <IconButton color="inherit">
                             <NotificationsIcon />
