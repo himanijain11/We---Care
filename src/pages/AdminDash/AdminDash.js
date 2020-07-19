@@ -12,27 +12,14 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText,
-    Container,
     Typography
 } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
-import Appbar from '../../Components/Appbar/Appbar'
-import Excel from '../Excel/Excel';
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import clsx from 'clsx';
-import Excel2 from '../Excel/Excel2';
-import App from '../StudentRegister/StudentRegister';
-import Assessment from '../Assesment/Assessment';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles, } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import ReportIcon from '@material-ui/icons/Report';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PortraitIcon from '@material-ui/icons/Portrait';
@@ -211,6 +198,12 @@ class AdminDash extends Component {
                                         <a href="/TempDisplayReport"> <RateReviewIcon /></a>
                                     </ListItemIcon>
                                     <a href="/TempDisplayReport" > Temperaturecheck Report </a>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon>
+                                        <a href="/HealthStats"> <RateReviewIcon /></a>
+                                    </ListItemIcon>
+                                    <a href="/HealthStats" >Health Stats</a>
                                 </ListItem>
                             </List></div></Router>
                     <Divider />

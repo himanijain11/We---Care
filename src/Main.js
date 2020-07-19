@@ -16,6 +16,7 @@ import TempDisplayReport from './pages/TemperatureCheck/TempDisplayReport';
 import StudentProAdmin from './pages/StudentProfile/StudentProAdmin';
 import Assessment1 from './pages/Assesment/Assessment1';
 import MessageRepoStudent from './pages/MessageReport/MessageRepoStudent';
+import Health from './pages/HealthStats/Health';
 export default () => (
     <BrowserRouter>
         <Switch>
@@ -35,6 +36,7 @@ export default () => (
             <Route exact path='/GatekeeperDash' component={GatekeeperDash}></Route>
             <Route exact path='/TemperatureCheck' component={TemperatureCheck}></Route>
             <Route exact path='/MessageReport' component={MessageReport}></Route>
+            <Route exact path='/HealthStats' component={Health}></Route>
           
         </Switch>
     </BrowserRouter>
