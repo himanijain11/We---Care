@@ -106,7 +106,6 @@ class StudentProAdmin extends Component {
                             </center>
                         </div>
                         <center>
-
                             <TableHead>
                                 <TableRow>
 
