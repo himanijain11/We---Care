@@ -48,11 +48,7 @@ function getSteps() {
 }
 
 class Assesment extends Component {
-
-
-
     state = {
-
         activeStep: 0,
         optionSelected: {
             a: "",
@@ -179,13 +175,14 @@ class Assesment extends Component {
         return (
             <React.Fragment>
                 <AdminDash />
-                <div style={{
-                    display: "inline-flex",
-                    marginLeft: "500px",
-
-
-                    flexDirection: "column"
-                }} className={classes.root}>
+                <div
+                    style={{
+                        display: "inline-flex",
+                        flexDirection: "column",
+                        background: "#fafafa",
+                        width:"100%                     "
+                    }}
+                    className={classes.root}>
                     <div><h1>Self Assesment Test</h1><br /></div>
                     <Stepper activeStep={this.state.activeStep} orientation="vertical">
                         {data.map((data, index) => (
@@ -205,26 +202,30 @@ class Assesment extends Component {
                                                         <MenuItem value={option + "@" + index}>{option}</MenuItem>
                                                     ))}
                                                 </Select>
-                                            </div>
-                                            <Button
-                                                disabled={this.state.activeStep === 0}
-                                                onClick={handleBack}
-                                                className={classes.button}
-                                            >
-                                                Back
+                                                <Button
+                                                    disabled={this.state.activeStep === 0}
+                                                    onClick={handleBack}
+                                                    className={classes.button}
+                                                >
+                                                    Back
                                             </Button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </StepContent>
                             </Step>
                         ))}
-                        <button
-                            style={{ display: "inline" }}
+                        <Button
+                            style={{
+                                marginTop: "35px"
+                            }}
+                            variant="outlined"
                             disabled={this.state.filled}
                             onClick={this.sendData}
                         >
                             Finish
-                        </button>
+                        </Button>
                     </Stepper>
                     {this.state.activeStep === steps.length && (
                         <Paper square elevation={0} className={classes.resetContainer}>

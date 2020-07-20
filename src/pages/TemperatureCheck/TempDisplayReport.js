@@ -35,6 +35,23 @@ class TempDisplayReport extends Component {
     };
   }
   componentDidMount() {
+    let tabledata = []
+
+    new Array(10).fill(0).map(d => {
+      tabledata = [
+        ...tabledata,
+        {
+          StudentID: "Data 1",
+          StudentName: "Data 2",
+          FathersName: "Data 3",
+          Class: "Data 4",
+          Section: "Data 4",
+          Temperature: "Data 4",
+        }
+      ]
+    })
+
+    this.setState({ kalu: tabledata })
     Axios.get('http://localhost:8080/examples/covid19_temperaturecheckreport.jsp').then(response => {
       this.setState({ kalu: response.data.responses })
     }).catch(err => {
@@ -49,27 +66,108 @@ class TempDisplayReport extends Component {
     return (
       <div>
         <AdminDash />
-        <div style={{marginTop:"30px"}} className={classes.paper}>
+        <div style={{ marginTop: "30px" }} className={classes.paper}>
           <br />
           <br />
           <center>
             <TableHead>
               <TableRow>
-                <TableCell align="center">Student ID</TableCell>
-                <TableCell align="center">Student Name</TableCell>
-                <TableCell align="center">Class</TableCell>
-                <TableCell align="center">Section</TableCell>
-                <TableCell align="center">Temperature</TableCell>
+                <TableCell
+                  align="center"
+
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    fontFamily: "Poppins"
+                  }}
+                >
+                  Student ID
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    fontFamily: "Poppins"
+                  }}
+                >
+                  Student Name
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    fontFamily: "Poppins"
+                  }}
+                >
+                  Class
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    fontFamily: "Poppins"
+                  }}
+                >
+                  Section
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    fontFamily: "Poppins"
+                  }}
+                >
+                  Temperature
+                </TableCell>
+
               </TableRow>
             </TableHead>
             <TableBody>
               {this.state.kalu.map((item) => (
                 <TableRow >
-                  <TableCell align="center">{item.StudentID}</TableCell>
-                  <TableCell align="center">{item.StudentName}</TableCell>
-                  <TableCell align="center">{item.Class}</TableCell>
-                  <TableCell align="center">{item.Section}</TableCell>
-                  <TableCell align="center">{item.Temperature}</TableCell>
+                  <TableCell
+                    style={{
+                      fontFamily: "Poppins"
+                    }}
+                    align="center">
+                    {item.StudentID}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontFamily: "Poppins"
+                    }}
+                    align="center">
+                    {item.StudentName}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontFamily: "Poppins"
+                    }}
+                    align="center">
+                    {item.Class}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontFamily: "Poppins"
+                    }}
+                    align="center">
+                    {item.Section}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontFamily: "Poppins"
+                    }}
+                    align="center">
+                    {item.Temperature}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

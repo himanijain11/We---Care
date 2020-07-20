@@ -1,70 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Axios from 'axios';
-import { sizing } from '@material-ui/system';
-
-import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box } from '@material-ui/core';
-// import App2 from './App2';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-        </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-const useStyles = ((theme) => ({
-
-  heading: {
-    marginTop: theme.spacing(7),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-
-  },
-  avatar: {
-    margin: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    backgroundColor: theme.palette.secondary.main,
-  },
-
-  paper1: {
-    marginTop: theme.spacing(8),
-    marginLeft: theme.spacing(70),
-    marginRight: theme.spacing(70),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(0),
-    marginLeft: theme.spacing(70),
-    marginRight: theme.spacing(70),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-
-
-}));
-
+import '../Mainpage/Mainpage.css'
 class MainPage extends Component {
   constructor() {
     super();
@@ -108,45 +48,78 @@ class MainPage extends Component {
     localStorage.setItem('currentUser', false)
     const { classes } = this.props
     return (
-      <div>
-        <div className={classes.heading}>
-          <Avatar className={classes.avatar}> <LockOutlinedIcon /> </Avatar>
-          <Typography component="h4" variant="h4">
-            Login
-          </Typography>
-          <div className={classes.form}>
+      <div style={{
+        textAlign: "center",
+        display: "flex",
+        backgroundImage: "linear-gradient(180deg, #0c0c0c 50%, #f1f1f1 50%)",
+        height: "100vh",
+
+      }}>
+        <div
+          className="wrapper"
+          style={{
+            background: "white",
+            boxShadow: "30px 30px 20px 20px rgba(0,0,0,0.3)",
+            borderRadius: "20px",
+            padding: window.innerWidth > 600 ? "50px 200px" : "50px",
+            margin: "auto",
+          }}>
+          <Typography
+            style={{
+              fontFamily: "Poppins",
+              fontWeight: "400",
+              color: "#00e676"
+            }}
+            variant="h1">
+            LoGiN
+            </Typography>
+
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <TextField
               required
+              style={{
+                marginBottom: "20px",
+                marginTop: "20px",
+              }}
               id="address1"
               name="username"
-              label="Unique ID"
+              label="Username"
               size="medium"
               onChange={this.handleDetailChange}
             />
 
-          </div>
-
-          <div className={classes.form}>
             <TextField
               required
               id="Password"
               name="password"
-              label="password"
+              label="Password"
               size="medium"
               onChange={this.handleDetailChange}
             />
-
-
           </div>
 
+          <Button
+            style={{
+              marginTop: "50px",
+              width: "150px"
+            }}
+            onClick={this.handleLogin}
 
+            variant="outlined"
+            color="primary"
+            fullWidth={true}>
+            Login
+          </Button>
 
-          <div className={classes.paper1}>
-            <Button onClick={this.handleLogin} variant="contained" color="transparent" fullWidth={true}> Login </Button>
-          </div>
         </div>
       </div>
     )
   };
 }
-export default withStyles(useStyles)(MainPage);
+export default (MainPage);

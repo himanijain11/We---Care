@@ -1,24 +1,20 @@
-
-import React, { usestate, Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
     AppBar,
     Divider,
     CssBaseline,
-    Hidden,
     IconButton,
     Toolbar,
-    Drawer,
     List,
     ListItem,
     ListItemIcon,
-    Typography
+    Typography,
+    SwipeableDrawer
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import clsx from 'clsx';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles, } from '@material-ui/core/styles';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
@@ -36,6 +32,7 @@ const useStyles = ((theme) => ({
     },
     toolbarIcon: {
         display: 'flex',
+
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: '0 8px',
@@ -64,6 +61,8 @@ const useStyles = ((theme) => ({
     },
     title: {
         flexGrow: 1,
+        display: "flex",
+        justifyContent: "center"
     },
     drawerPaper: {
 
@@ -110,7 +109,7 @@ class AdminDash extends Component {
     constructor() {
         super();
         this.state = {
-            open: true
+            open: false
         };
     }
     handleDrawerOpen = () => {
@@ -121,13 +120,15 @@ class AdminDash extends Component {
     };
     render() {
         const { classes } = this.props;
-        // [open, setOpen] = state,setState(true);
         const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
         return (
 
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar position="absolute" color="secondary" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
+                <AppBar
+                    position="absolute"
+                    color="black"
+                    className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                         <IconButton
                             edge="start"
@@ -138,26 +139,39 @@ class AdminDash extends Component {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            Admin Dashboard
+                        <Typography
+                            variant="h4"
+                            style={{
+                                fontWeight: "300",
+                                fontFamily: 'Lobster',
+                            }}
+                            noWrap
+                            className={classes.title}>
+                            <span>Admin</span>
                         </Typography>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            {"Hello! " + localStorage.getItem('user')}
-
-                        </Typography>
-                        <div>
-                            <button onClick={() => this.props.history.push('/')} style={{ color: "black", border: "0px", borderRadius: "10px", padding: "10px", backgroundColor: "white" }}>Logout</button>
+                        <div style={{fontFamily:"poppins" , marginRight:"20px"}} >
+                        {"Hello! " + localStorage.getItem('user')}
                         </div>
-                        <IconButton color="inherit">
-                            <NotificationsIcon />
-                        </IconButton>
+
+                        <div>
+                            <button
+                                onClick={() => this.props.history.push('/')}
+                                style={{
+                                    cursor: "pointer",
+                                    color: "black",
+                                    fontWeight: "500",
+                                    border: "2px solid black",
+                                    padding: "10px",
+                                    backgroundColor: "white",
+                                }}
+                            >
+                                Logout
+                            </button>
+                        </div>
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
+                <SwipeableDrawer
+                    anchor="top"
                     open={this.state.open}
                 >
                     <div className={classes.toolbarIcon}>
@@ -166,49 +180,73 @@ class AdminDash extends Component {
                         </IconButton>
                     </div>
                     <Divider />
-                    <Router>
-                        <div>
-                            <List>
-                                <ListItem button>
+                    <div>
+                        <List>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/App">
                                     <ListItemIcon>
-                                        <a href="/App">  <GroupAddIcon />  </a>
+                                        <GroupAddIcon />
                                     </ListItemIcon>
-                                    {<a href="/App" >Student Registation</a>}
-                                </ListItem>
-                                <ListItem button>
+                                   Student Registation
+                                </a>
+                            </ListItem>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/Assessment">
                                     <ListItemIcon>
-                                        <a href="/Assessment"> <AssessmentIcon /></a>
+                                        <AssessmentIcon />
                                     </ListItemIcon>
-                                    <a href="/Assessment" >Self Assessment </a>
-                                </ListItem>
-                                <ListItem button>
+                                    Self Assessment
+                               </a>
+                            </ListItem>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/AssessmentDisplay" >
                                     <ListItemIcon>
-                                        <a href="/AssessmentDisplay"> <EventNoteIcon /></a>
+                                        <EventNoteIcon />
                                     </ListItemIcon>
-                                    <a href="/AssessmentDisplay" >Self Assesment Report </a>
-                                </ListItem>
-                                <ListItem button>
+                                    Self Assesment Report
+                                </a>
+                            </ListItem>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/StudentProAdmin">
                                     <ListItemIcon>
-                                        <a href="/StudentProAdmin"> <PortraitIcon /></a>
+                                        <PortraitIcon />
                                     </ListItemIcon>
-                                    <a href="/StudentProAdmin" > Student Profile Display</a>
-                                </ListItem>
-                                <ListItem button>
+                                        Student Profile Display
+                                </a>
+                            </ListItem>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/TempDisplayReport">
                                     <ListItemIcon>
-                                        <a href="/TempDisplayReport"> <RateReviewIcon /></a>
+                                        <RateReviewIcon />
                                     </ListItemIcon>
-                                    <a href="/TempDisplayReport" > Temperaturecheck Report </a>
-                                </ListItem>
-                                <ListItem button>
+                                    Temperaturecheck Report
+                                    </a>
+                            </ListItem>
+                            <ListItem button>
+                                <a
+                                    style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                    href="/HealthStats">
                                     <ListItemIcon>
-                                        <a href="/HealthStats"> <RateReviewIcon /></a>
+                                        <RateReviewIcon />
                                     </ListItemIcon>
-                                    <a href="/HealthStats" >Health Stats</a>
-                                </ListItem>
-                            </List></div></Router>
+                                    Health Stats
+                                    </a>
+                            </ListItem>
+                        </List>
+                    </div>
                     <Divider />
-                </Drawer>
-            </div>
+                </SwipeableDrawer>
+            </div >
         );
     }
 }

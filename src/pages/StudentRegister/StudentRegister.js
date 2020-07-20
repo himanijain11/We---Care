@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
 import AdminDash from '../AdminDash/AdminDash';
+import Alert from '@material-ui/lab/Alert';
+import { Select, MenuItem, MenuList, Snackbar } from '@material-ui/core';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -47,6 +49,12 @@ const useStyles = ((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 class App extends Component {
@@ -59,10 +67,11 @@ class App extends Component {
       t4: "",
       t5: "",
       t6: "",
-      t7: "",
+      t7: "Gender",
       t8: "",
-
-      message: ""
+      message: "",
+      showAlert: false,
+      showAlertError: false
     }
   }
   fun = e => {
@@ -71,7 +80,7 @@ class App extends Component {
       [e.target.name]: e.target.value
     })
   }
-  sendData = ev => {
+  sendData = () => {
     const t1 = this.state.t1
     const t2 = this.state.t2
     const t3 = this.state.t3
@@ -86,9 +95,12 @@ class App extends Component {
     Axios.get('http://localhost:8080/examples/covid19_register.jsp', { params: data }).then(response => {
       console.log(response);
       this.setState({
-        message: response.data.response
+        message: response.data.response,
+        showAlert: true
       })
+
     }).catch(err => {
+      this.setState({ showAlertError: true })
       console.log("Failed");
     })
   }
@@ -99,51 +111,149 @@ class App extends Component {
     return (
       <div>
         <AdminDash />
-        <div style={{marginTop:"100px"}}  className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Register
+
+        <div style={{
+          marginTop:"50px",
+          background: "#f5f5f5",
+          padding: "50px 100px 25px",
+        }} className={classes.paper}>
+
+          <div
+            style={{
+              background: "black",
+              padding: "20px 50px",
+              verticalAlign: "middle",
+              marginBottom: "50px",
+            }}
+          >
+            <Typography
+              style={{
+                fontWeight: "400",
+                color: "#121212",
+                opacity: "1",
+                color: "white",
+
+                fontFamily: "Poppins"
+              }}
+              component="h1"
+              variant="h2">
+              Register
           </Typography>
-          <div className={classes.form} noValidate>
-            <div>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                id="standard-size-normal"
-                label="Student ID" name="t1" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                id="standard-size-normal" label="Student name" name="t2" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Fathers name" name="t3" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Class" name="t4" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Section" name="t5" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Contact no" name="t6" onChange={this.fun.bind(this)} />
-            </div>
-            <div>
-              <select name="t7" value={this.state.t7} onChange={this.fun}>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-            <div>
-              <TextField variant="outlined" margin="normal" id="standard-size-normal" label="Transportation" name="t8" onChange={this.fun.bind(this)} />
-            </div>
-            <Button onClick={this.sendData.bind(this)} size="small" variant="contained" color="primary" className={classes.submit}>Submit </Button>
-            {this.state.message}
           </div>
+
+          <div
+            noValidate>
+            <Grid
+              justify="center"
+              // alignItems="center"
+              container
+            >
+              <Grid
+                container
+                justify="center"
+                item
+                md={4}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Student ID" name="t1" onChange={this.fun.bind(this)} />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Student name"
+                  name="t2"
+                  onChange={this.fun.bind(this)} />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Fathers name"
+                  name="t3"
+                  onChange={this.fun.bind(this)} />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Class"
+                  name="t4"
+                  onChange={this.fun.bind(this)} />
+              </Grid>
+              <Grid justify="center" container item md={4}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Section"
+                  name="t5"
+                  onChange={this.fun.bind(this)} />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Contact no"
+                  name="t6"
+                  onChange={this.fun.bind(this)} />
+
+                <div
+                  style={{
+                    padding: "24px"
+                  }}
+                >
+                  <Select
+                    style={{ width: "245px" }}
+                    name="t7"
+                    defaultValue="Gender"
+                    value={this.state.t7}
+                    onChange={(e) => this.fun(e)}>
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                  </Select>
+                </div>
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  id="standard-size-normal"
+                  label="Transportation"
+                  name="t8"
+                  onChange={this.fun.bind(this)} />
+              </Grid>
+              <Grid
+                justify="center"
+                container
+                item md={12}
+                xs={12}>
+                <Button
+                  style={{
+                    padding: "15px 25px"
+                  }}
+                  onClick={this.sendData.bind(this)}
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.submit}>
+                  Submit
+            </Button>
+              </Grid>
+            </Grid>
+
+          </div>
+          <Snackbar open={this.state.showAlert}  autoHideDuration={5000}>
+            <Alert onClose={() => this.setState({ showAlert: false })} severity="success">
+              Student is Registered
+            </Alert>
+          </Snackbar>
+          <Snackbar open={this.state.showAlertError} autoHideDuration={5000}>
+            <Alert onClose={() => this.setState({ showAlertError: false })} severity="error">
+              Student is not registered
+            </Alert>
+          </Snackbar>
         </div>
       </div>
 
