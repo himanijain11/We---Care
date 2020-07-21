@@ -186,14 +186,14 @@ class StudentDash extends Component {
                                     <ListItemIcon>
                                         <a href="/Assessment1"> <AssessmentIcon /></a>
                                     </ListItemIcon>
-                                    {<a href="/Assessment1" >Self Assesment</a>}
+                                    {<a href="/Assessment1" >Self Assessment</a>}
                                 </ListItem>
                                
                                 <ListItem button>
                                     <ListItemIcon>
-                                        <a href="/MessageRepoStudent"> <EventNoteIcon /></a>
+                                        <a href="/StudentAssReport"> <EventNoteIcon /></a>
                                     </ListItemIcon>
-                                    <a href="/MessageRepoStudent" >Message Report</a>
+                                    <a href="/StudentAssReport" >Self Assessment Report</a>
                                 </ListItem>
                             </List></div></Router>
                     <Divider />

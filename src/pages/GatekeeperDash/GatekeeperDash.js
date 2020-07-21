@@ -198,9 +198,9 @@ class GatekeeperDash extends Component {
                                 </ListItem>
                                 <ListItem button>
                                 <ListItemIcon>
-                                        <a href="/MessageReport"> <PersonOutlineOutlinedIcon /></a>
+                                        <a href="/GateTempReport"> <PersonOutlineOutlinedIcon /></a>
                                     </ListItemIcon>   
-                                 <a href="/MessageReport" >Message Report
+                                 <a href="/GateTempReport" >Temperature Report
                         </a>
                                 </ListItem>
 

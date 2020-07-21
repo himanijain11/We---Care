@@ -7,7 +7,6 @@ import Excel2 from './pages/Excel/Excel2';
 import Assessment from './pages/Assesment/Assessment';
 import Excel from './pages/Excel/Excel';
 import StudentAttend from '../src/pages/StudentAttendance/StudentAttend';
-import MessageReport from '../src/pages/MessageReport/MessageReport';
 import StudentDash from './pages/StudentDash/StudentDash';
 import GatekeeperDash from './pages/GatekeeperDash/GatekeeperDash';
 import TemperatureCheck from './pages/TemperatureCheck/TemperatureCheck';
@@ -15,8 +14,9 @@ import AssessmentDisplay from './pages/Assesment/AssessmentDisplay';
 import TempDisplayReport from './pages/TemperatureCheck/TempDisplayReport';
 import StudentProAdmin from './pages/StudentProfile/StudentProAdmin';
 import Assessment1 from './pages/Assesment/Assessment1';
-import MessageRepoStudent from './pages/MessageReport/MessageRepoStudent';
+import StudentAssReport from './pages/StudentDash/StudentAssReport';
 import Health from './pages/HealthStats/Health';
+import GateTempReport from './pages/GatekeeperDash/GateTempReport';
 export default () => (
     <BrowserRouter>
         <Switch>
@@ -30,12 +30,12 @@ export default () => (
             <Route exact path='/TempDisplayReport' component={TempDisplayReport}></Route>
             <Route exact path='/StudentDash' component={StudentDash}></Route>
             <Route  path='/Assessment1' component={Assessment1}></Route>
-            <Route exact path='/MessageRepoStudent' component={MessageRepoStudent}></Route>
+            <Route exact path='/StudentAssReport' component={StudentAssReport}></Route>
             <Route exact path='/StudentProAdmin' component={StudentProAdmin}></Route>
             <Route exact path='/StudentAttend' component={StudentAttend}></Route>
             <Route exact path='/GatekeeperDash' component={GatekeeperDash}></Route>
             <Route exact path='/TemperatureCheck' component={TemperatureCheck}></Route>
-            <Route exact path='/MessageReport' component={MessageReport}></Route>
+            <Route exact path='/GateTempReport' component={GateTempReport}></Route>
             <Route exact path='/HealthStats' component={Health}></Route>
           
         </Switch>
