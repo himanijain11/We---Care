@@ -1,39 +1,25 @@
-
-import React, { usestate, Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
     AppBar,
     Divider,
     CssBaseline,
-    Hidden,
     IconButton,
     Toolbar,
-    Drawer,
     List,
     ListItem,
     ListItemIcon,
-    ListItemText,
-    Container,
-    Typography
+    Typography,
+    SwipeableDrawer
 } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
-// import Appbar from '../../Components/Appbar/Appbar'
-// import Excel from '../Excel/Excel';
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import clsx from 'clsx';
-// import Excel2 from '../Excel/Excel2';
-// import App from '../StudentRegister/StudentRegister';
-// import Assessment from '../Assesment/Assessment';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles, } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import ReportIcon from '@material-ui/icons/Report';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import PortraitIcon from '@material-ui/icons/Portrait';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 const drawerWidth = 240;
 
@@ -46,6 +32,7 @@ const useStyles = ((theme) => ({
     },
     toolbarIcon: {
         display: 'flex',
+
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: '0 8px',
@@ -74,9 +61,11 @@ const useStyles = ((theme) => ({
     },
     title: {
         flexGrow: 1,
+        display: "flex",
+        justifyContent: "center"
     },
     drawerPaper: {
-        // position: 'relative',
+
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -120,7 +109,7 @@ class StudentDash extends Component {
     constructor() {
         super();
         this.state = {
-            open: true
+            open: false
         };
     }
     handleDrawerOpen = () => {
@@ -131,79 +120,97 @@ class StudentDash extends Component {
     };
     render() {
         const { classes } = this.props;
-        // [open, setOpen] = state,setState(true);
         const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
         return (
+            <>
+                <div className={classes.root}>
+                    <CssBaseline />
+                    <AppBar
+                        position="absolute"
+                        color="black"
+                        className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
+                        <Toolbar className={classes.toolbar}>
+                            <IconButton
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={this.handleDrawerOpen}
+                                className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography
+                                variant="h4"
+                                style={{
+                                    fontWeight: "300",
+                                    fontFamily: 'Lobster',
+                                }}
+                                noWrap
+                                className={classes.title}>
+                                <span>Student</span>
+                            </Typography>
+                            <div style={{ fontFamily: "poppins", marginRight: "20px" }} >
+                                {"Hello! " + localStorage.getItem('user')}
+                            </div>
 
-            <div className={classes.root}>
-
-                <CssBaseline />
-                <AppBar position="absolute" color="secondary" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
-                    <Toolbar className={classes.toolbar}>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            Student Dashboard
-                        </Typography>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            {"Hello! " + localStorage.getItem('user')}
-                        </Typography>
-                        <div>
-                        <button onClick={()=>this.props.history.push('/')}  style= {{color:"black" , border:"0px" , borderRadius:"10px" , padding:"10px" , backgroundColor:"white"}}>Logout</button>
+                            <div>
+                                <button
+                                    onClick={() => this.props.history.push('/')}
+                                    style={{
+                                        cursor: "pointer",
+                                        color: "black",
+                                        fontWeight: "500",
+                                        border: "2px solid black",
+                                        padding: "10px",
+                                        backgroundColor: "white",
+                                    }}
+                                >
+                                    Logout
+                            </button>
+                            </div>
+                        </Toolbar>
+                    </AppBar>
+                    <SwipeableDrawer
+                        anchor="top"
+                        open={this.state.open}
+                    >
+                        <div className={classes.toolbarIcon}>
+                            <IconButton onClick={this.handleDrawerClose}>
+                                <ChevronLeftIcon />
+                            </IconButton>
                         </div>
-                        <IconButton color="inherit">
-                            {/* <Badge badgeContent={4} color="secondary"> */}
-                            <NotificationsIcon />
-                            {/* </Badge> */}
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
-                    open={this.state.open}
-                >
-                    <div className={classes.toolbarIcon}>
-
-                        <IconButton onClick={this.handleDrawerClose}>
-                            <ChevronLeftIcon />
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <Router>
+                        <Divider />
                         <div>
                             <List>
                                 <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/Assessment1"> <AssessmentIcon /></a>
-                                    </ListItemIcon>
-                                    {<a href="/Assessment1" >Self Assessment</a>}
+                                    <a
+                                        style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                        href="/Assessment1">
+                                        <ListItemIcon>
+                                            <RateReviewIcon />
+                                        </ListItemIcon>
+                                    Self Assessment
+                                    </a>
                                 </ListItem>
-                               
                                 <ListItem button>
-                                    <ListItemIcon>
-                                        <a href="/StudentAssReport"> <EventNoteIcon /></a>
-                                    </ListItemIcon>
-                                    <a href="/StudentAssReport" >Self Assessment Report</a>
+                                    <a
+                                        style={{ fontFamily: "Poppins", color: "black", textDecoration: "none" }}
+                                        href="/StudentAssReport">
+                                        <ListItemIcon>
+                                            <RateReviewIcon />
+                                        </ListItemIcon>
+                                    Self Assessment Report
+                                    </a>
                                 </ListItem>
-                            </List></div></Router>
-                    <Divider />
-                </Drawer>
-               
+                            </List>
+                        </div>
+                        <Divider />
+                    </SwipeableDrawer>
 
-            </div>
-
-
+                </div >
+                <div style={{ marginBottom: "120px" }}></div>
+            </>
         );
     }
 }
-export default withRouter( withStyles(useStyles)(StudentDash));
+export default withRouter(withStyles(useStyles)(StudentDash))
