@@ -121,18 +121,17 @@ class App extends Component {
           <div
             style={{
               background: "black",
-              padding: "20px 50px",
+              padding: "10px 10px",
               verticalAlign: "middle",
               marginBottom: "50px",
             }}
           >
             <Typography
               style={{
-                fontWeight: "400",
+                fontWeight: "200",
                 color: "#121212",
                 opacity: "1",
                 color: "white",
-
                 fontFamily: "Poppins"
               }}
               component="h1"
