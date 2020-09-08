@@ -121,7 +121,7 @@ class App extends Component {
           <div
             style={{
               background: "black",
-              padding: "10px 10px",
+              padding: "5px 5px",
               verticalAlign: "middle",
               marginBottom: "50px",
             }}
